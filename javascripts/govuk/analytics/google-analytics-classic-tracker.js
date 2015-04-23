@@ -102,6 +102,21 @@
     _gaq.push(['_trackSocial', network, action, target]);
   };
 
+  /*
+   https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSite
+   trackerId - the UA account code to track the domain against
+   name      - name for the tracker
+   domain    - the domain to track
+   */
+  GoogleAnalyticsClassicTracker.prototype.addLinkedTrackerDomain = function(trackerId, name, domain) {
+    _gaq.push(
+      [name + '._setAccount', trackerId],
+      [name + '._allowLinker', true],
+      [name + '._setDomain', domain],
+      [name + '._trackPageview']
+    );
+  };
+
   // https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingCustomVariables
   GoogleAnalyticsClassicTracker.prototype.setCustomVariable = function(index, value, name, scope) {
     var PAGE_LEVEL_SCOPE = 3;
